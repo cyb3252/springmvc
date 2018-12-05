@@ -31,6 +31,7 @@ public class DispatcherServlet extends HttpServlet {
 
     private String name = "你好呀";
     private Double moneny = 0d;
+    private String address="";
     //扫描基类的包
     private String basePackage = "";
     //扫描的包下所有的带包路径的全限定名称
