@@ -29,8 +29,8 @@ import java.util.Map;
 })
 public class DispatcherServlet extends HttpServlet {
 
-    private int age=1;
-    private int age=50;
+    private String name = "你好呀";
+    private Double moneny = 0d;
     //扫描基类的包
     private String basePackage = "";
     //扫描的包下所有的带包路径的全限定名称
@@ -56,7 +56,7 @@ public class DispatcherServlet extends HttpServlet {
         String path = uri.replace(contextPath, "");
 
         Method method = urlMethodMap.get(path);
-        if (method!=null){
+        if (method != null) {
             String packageName = methodStringMap.get(method);
             String controllerName = nameMap.get(packageName);
             method.setAccessible(true);
@@ -99,19 +99,19 @@ public class DispatcherServlet extends HttpServlet {
                     Method[] methods = c.getMethods();
                     StringBuilder baseUrl = new StringBuilder();
                     //在检测方法上是否标注了requestMapping
-                    if (c.isAnnotationPresent(RequestMapping.class)){
+                    if (c.isAnnotationPresent(RequestMapping.class)) {
                         RequestMapping requestMapping = c.getAnnotation(RequestMapping.class);
                         baseUrl.append(requestMapping.value());
                     }
 
                     //遍历该类的所有方法，如果方法上有requestmapping注解就拼装成一个url 最后把url和方法放在一个map中
                     for (Method method : methods) {
-                        if (method.isAnnotationPresent(RequestMapping.class)){
+                        if (method.isAnnotationPresent(RequestMapping.class)) {
                             RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
                             baseUrl = baseUrl.append(requestMapping.value());
 
-                            urlMethodMap.put(baseUrl.toString(),method);
-                            methodStringMap.put(method,packageName);
+                            urlMethodMap.put(baseUrl.toString(), method);
+                            methodStringMap.put(method, packageName);
                         }
                     }
                 }
@@ -207,7 +207,7 @@ public class DispatcherServlet extends HttpServlet {
         /*URL url = this.getClass().getClassLoader().getResource("/" + basePackage.replaceAll("\\.", "/"));
         String path = url.getPath();*/
         //模拟得到的路径
-        String path = "D:\\IdeaProjects\\springmvc\\src\\main\\java\\"+basePackage.replaceAll("\\.","/");
+        String path = "D:\\IdeaProjects\\springmvc\\src\\main\\java\\" + basePackage.replaceAll("\\.", "/");
         File basePackageFile = new File(path);
         File[] childFile = basePackageFile.listFiles();
         for (File file : childFile) {
