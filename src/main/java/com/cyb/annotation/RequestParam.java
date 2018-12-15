@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
  * @author cyb
  * @date 2018/12/2 - 20:04
  */
-@Target({ElementType.METHOD,ElementType.TYPE})
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequestMapping {
+public @interface RequestParam {
     String value () default "";
 }

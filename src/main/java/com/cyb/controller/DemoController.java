@@ -3,6 +3,7 @@ package com.cyb.controller;
 import com.cyb.annotation.Autowired;
 import com.cyb.annotation.Controller;
 import com.cyb.annotation.RequestMapping;
+import com.cyb.annotation.RequestParam;
 import com.cyb.service.DemoService;
 
 /**
@@ -16,9 +17,12 @@ public class DemoController {
     private DemoService demoService;
 
     @RequestMapping(value = "/demo")
-    public String hello(){
+    public String hello(@RequestParam("name") String name, @RequestParam("age") String age){
         System.out.println("demoController..");
         demoService.sayHello();
-        return "invoke sucess";
+
+        return name+age;
     }
+
+
 }
